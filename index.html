@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+
+<body>
+    <header>
+        <div class="header_div_quality">
+            <h2>The Bombe v2</h2>
+        </div>
+        <!-- <hr> -->
+        <div class="cabecalho">
+            <a href="index.html">Home</a>
+            <a href="sobre.html">Sobre</a>
+        </div>
+        <!-- <hr> -->
+    </header>
+
+    <main>
+        <form name="formulario">
+            <div class="form_radios_type_quality">
+                <div class="form_radios_type_cifra">
+                    <input type="radio" name="tipo" id="cifra" onclick="componenteUnhidden()">
+                    <label class="form_label" for="cifra">Cifra de Cesar</label>
+                </div>
+                <div class="form_radios_type_base">
+                    <input type="radio" name="tipo" id="base" onclick="componenteUnhidden()" checked>
+                    <label class="form_label" for="base">Base64</label>
+                </div>
+            </div>
+            <div class="form_div_adjust">
+                <div class="form_text-enter">
+                    <b>Mensagem<font color="red">*</font></b>
+                    <textarea name="text_enter" class="texto_entrada" onclick="reseta()" id="texto_entrada"></textarea>
+                </div>
+                <p class="error" id="error"></p>
+                <div class="component">
+                    <input type="number" value="1" class="number" id="num">
+                    <label for="number">Incremento</label>
+                </div>
+            </div>
+            <div class="form_radios_mode"> <!-- ARUMAR DISPOSIÇÃO DOS RADIOS-->
+                <div class="form_radios_mode_encript">
+                    <input type="radio" name="mode" id="encript" onclick="nomeBotao()" checked>
+                    <label for="encript">Encriptar</label>
+                </div>
+                <div>
+                    <input type="radio" name="mode" id="decript" onclick="nomeBotao()">
+                    <label for="decript">Decriptar</label>
+                </div>
+            </div>
+            <div class="form_text-saida">
+                <p id="saida"></p>
+                <textarea name="texto" class="texto_saida" id="texto_saida" readonly></textarea>
+            </div>
+            <div class="button_quality">
+                <button type="button" class="botao" id="btn" onclick="botao()">Encriptar</button>
+            </div>
+        </form>
+    </main>
+
+    <footer>
+        <hr>
+        <div>
+            <p class="creator">Desenvolvido por: Diego Baumbach&copy</p>
+        </div>
+    </footer>
+</body>
+<script src="./script/script.js"></script>
+</html>
