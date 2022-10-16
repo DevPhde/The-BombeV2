@@ -4,12 +4,19 @@ var incremento = document.getElementById("num");
 
 function nomeBotao() { // modifica o nome do botao ao clicar no radio
     let encripta = document.getElementById("encript");
+    var btn = document.getElementById("btn")
+    if (encripta.checked == true) { // AJUSTAR 
+        btn.className = "btn_move"; // 
+        btn.innerHTML = "Encriptar"; // 
 
-    if (encripta.checked == true) {
-        document.getElementById("btn").innerHTML = "Encriptar"
+        setTimeout(function() { //
+            btn.className = "btn_unmove"; // 
+          }, 1500);// 
+        
+       
     }
     else {
-        document.getElementById("btn").innerHTML = "Decriptar"
+        btn.innerHTML = "Decriptar";
     }
 }
 function componenteUnhidden() { // FAZ APARECER O INPUT PARA PREENCHER COM O INCREMENTO DA CIFRA DE CESAR
@@ -36,16 +43,16 @@ function botao() {
             // CIFRA DE CESAR
         if (document.getElementById("cifra").checked) {
             cifra(mensagemEntrada, incremento, mensagemSaida); // CHAMA A FUNÇÃO PARA CRIPTOGRAFAR
-            mensagemSaida.style.width = "250px" // codigo para abrir a caixa saida
-            mensagemSaida.style.height = "100px"
-            mensagemSaida.style.visibility = "visible"
+            mensagemSaida.style.width = "250px"; // codigo para abrir a caixa saida
+            mensagemSaida.style.height = "100px";
+            mensagemSaida.style.visibility = "visible";
         }
             // BASE64
         else {
             base(mensagemEntrada, mensagemSaida);
-            mensagemSaida.style.width = "250px" // codigo para abrir a caixa saida
-            mensagemSaida.style.height = "100px"
-            mensagemSaida.style.visibility = "visible"
+            mensagemSaida.style.width = "250px"; // codigo para abrir a caixa saida
+            mensagemSaida.style.height = "100px";
+            mensagemSaida.style.visibility = "visible";
         }   
     }
 }
@@ -59,18 +66,27 @@ function cifra(mensagemEntrada, incremento, mensagemSaida) {
     var acento = "áàãâäéèêíìîóòôõúùûüç".split("");
     var mensagemPronta = "";  // variável onde será montado a nova frase (codificada ou decodificada)
     var fraseLowerCase = mensagemEntrada.toLowerCase();
+
     incremento = incremento % 26;
     for (var index = 0; index < fraseLowerCase.length; index++) {
         var currentLetter = fraseLowerCase[index];
+
         if (currentLetter === " ") {
             mensagemPronta += currentLetter;
             continue;
         }
-        if (acento.indexOf(currentLetter) != -1) {
-            var currentLetter = currentLetter.normalize('NFD').replace(/[\u0300-\u036f]/g, ""); // substitui letras com acentos por letras sem acentos
+        // BUSCAR SOLUÇÃO MAIS EFICIENTE PARA ESSE IF.
+        if (acento.includes(currentLetter) === true) { // substitui letras com acento por letras sem acento
+            var currentLetter = currentLetter.replace(/[áàãâä]/i,"a");
+            var currentLetter = currentLetter.replace(/[éèê]/i,"e");
+            var currentLetter = currentLetter.replace(/[íìî]/i,"i"); 
+            var currentLetter = currentLetter.replace(/[óòôõ]/i,"o"); 
+            var currentLetter = currentLetter.replace(/[úùûü]/i,"u"); 
+            var currentLetter = currentLetter.replace(/[ç]/i,"c"); 
         }
-        if (alfabeto.indexOf(currentLetter) == -1) { // caso o usuário coloque caracteres especiais ou números, os mesmos serão adicionados a variável "mensagemPronta", sem precisar passar pela tratativa da cifra de cesar.
-            mensagemPronta += currentLetter; 
+        if (alfabeto.includes(currentLetter) == false) { // caso o usuário coloque caracteres especiais ou números, os mesmos serão adicionados a variável "mensagemPronta", sem precisar passar pela tratativa da cifra de cesar.
+            mensagemPronta += currentLetter;
+
         }
         else{
             var currentIndex = alfabeto.indexOf(currentLetter);
