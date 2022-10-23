@@ -51,9 +51,14 @@ function btnFunction() {
     else {
             // CIFRA DE CESAR
         if (document.getElementById("cipher").checked) {
+            if (increment.value == "") { 
+                document.getElementById("error_increment").innerHTML = "Preencha com o Incremento";
+            }    
+            else {       
             cipher(messageIn, increment, messageOut); // CHAMA A FUNÇÃO PARA CODIFICAR/DECODIFICAR
             messageOut.className = "move_text_out";
             setTimeout(outputAnimation, 500);
+            }
         }
             // BASE64
         else {
@@ -136,16 +141,26 @@ function base(messageIn, messageOut) {
     }
 }
 
-// TIRA MENSAGEM DE ERRO AO CLICAR NO TextArea "MENSAGEM"  + LIMPAR E FECHAR CAIXA DE TEXTO "SAIDA DO CODIGO PRONTO"
-function resetTargets() {
-    let labelCode = document.querySelector("b.b_code");
-    document.querySelector("p#error").innerHTML = "";
+// TIRA MENSAGEM DE ERRO
+let text = document.getElementById("text_in");
+text.addEventListener("click", (function(){
+    document.getElementById("error").innerHTML = "";
+}));
+increment.addEventListener("click", (function(){
+    document.getElementById("error_increment").innerHTML = "";
+}));
 
-    labelCode.style.transform = "translate(0, 150%)";
-    labelCode.style.transition = "all 0.5s";
-    labelCode.style.visibility = "hidden";
-    setTimeout(function() {
-            messageOut.className = "text_area_out";
-        }, 500);
-    messageOut.innerHTML = "";
-}
+// TIRA MENSAGEM DE ERRO + LIMPAR E FECHAR CAIXA DE TEXTO "SAIDA DO CODIGO PRONTO"
+// function resetTargets() {
+//     let labelCode = document.querySelector("b.b_code");
+
+//     console.log(pe);
+//     // SOME A CAIXA DE SAÍDA DO CODIGO
+//     labelCode.style.transform = "translate(0, 150%)";
+//     labelCode.style.transition = "all 0.5s";
+//     labelCode.style.visibility = "hidden";
+//     setTimeout(function() {
+//             messageOut.className = "text_area_out";
+//         }, 500);
+//     messageOut.innerHTML = "";
+// }

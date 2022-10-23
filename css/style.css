@@ -237,13 +237,6 @@ fieldset:hover, .text_area_in:hover, .move_text_out:hover {
     background-color: #9A86FD;
     padding: 10px 0;
 }
-
-button:hover {
-    background-color: aliceblue;
-    color: #2A2734;
-    transform: translate(0px, -6px);
-    transition: all 0.5s;
-}
 /*END BUTTON */
 
 
@@ -282,7 +275,7 @@ img:hover {
 
 @media only screen and (min-width: 1250px) {
     footer {
-        margin: 400px 0 30px 0;
+        margin: 300px 0 30px 0;
     }
     main {
         width: 950px;
@@ -292,7 +285,7 @@ img:hover {
 
 @media only screen and (max-width: 1250px) {
     footer {
-        margin: 400px 0 30px 0;
+        margin: 200px 0 30px 0;
     }
     main {
         width: 750px;
@@ -302,7 +295,7 @@ img:hover {
 
 @media only screen and (max-width: 1000px) {
     footer {
-        margin: 300px 0 30px 0;
+        margin: 250px 0 30px 0;
     }
     .header_div_quality {
         margin: 10px 50px;
@@ -317,7 +310,7 @@ img:hover {
 
 @media only screen and (max-width: 770px) {
     footer {
-        margin: 300px 0 30px 0;
+        margin: 100px 0 30px 0;
     }
     .header_div_quality {
         margin: 10px 20px;
@@ -330,9 +323,6 @@ img:hover {
 }
 
 @media only screen and (max-width: 700px) {
-    footer {
-        margin: 300px 0 30px 0;
-    }
     .header_div_quality {
         margin: 10px 20px;
     }
@@ -354,10 +344,16 @@ img:hover {
     }
 }
 
-@media only screen and (max-width: 500px) {
-    footer {
-        margin: 200px 0 30px 0;
+@media only screen and (min-width: 700px) {
+    button:hover {
+        background-color: aliceblue;
+        color: #2A2734;
+        transform: translate(0px, -6px);
+        transition: all 0.5s;
     }
+}
+
+@media only screen and (max-width: 500px) {
     .header_div_quality {
         margin: 10px 20px;
     }
@@ -378,6 +374,7 @@ img:hover {
         align-items: center;
         /* align-content: center; */
     }
+    
 }
 
 @media only screen and (max-width: 370px) {
