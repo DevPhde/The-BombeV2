@@ -1,82 +1,96 @@
-var mensagemEntrada = document.getElementById("texto_entrada");
-var mensagemSaida = document.getElementById("texto_saida");
-var incremento = document.getElementById("num");
 
-function nomeBotao() { // modifica o nome do botao ao clicar no radio
-    let encripta = document.getElementById("encript");
-    var btn = document.getElementById("btn")
-    if (encripta.checked == true) { // AJUSTAR 
-        btn.className = "btn_move"; // 
-        btn.innerHTML = "Encriptar"; // 
+let messageIn = document.getElementById("text_in");
+let messageOut = document.getElementById("text_out");
+let increment = document.getElementById("increment");
+let messageCode = document.querySelector(".text_output")
 
-        setTimeout(function() { //
-            btn.className = "btn_unmove"; // 
-          }, 1500);// 
-        
-       
+
+// modifica o nome do botao ao clicar no radio + animação sumir e aparecer
+function buttonAnimation() { 
+    let encript = document.getElementById("code");
+    let btn = document.getElementById("btn");
+    
+    if (encript.checked == true) {
+        btn.className = "btn_move";  
+        setTimeout(function() { 
+            btn.innerHTML = "Codificar"
+        }, 500);
+        setTimeout(function() {
+            btn.className = "btn_unmove"
+        }, 800); 
     }
     else {
-        btn.innerHTML = "Decriptar";
-    }
-}
-function componenteUnhidden() { // FAZ APARECER O INPUT PARA PREENCHER COM O INCREMENTO DA CIFRA DE CESAR
-    let cifra = document.getElementById("cifra");
-
-    if (cifra.checked == true) {
-        document.querySelector("div.component").style.visibility = "visible";
-        document.querySelector("div.component").style.width = "280px";
-    }
-    else {
-        document.querySelector("div.component").style.visibility = "hidden";
-        document.querySelector("div.component").style.width = "1px";
+        btn.className = "btn_move";
+        setTimeout(function() { 
+            btn.innerHTML = "Decodificar"
+        }, 500);
+        setTimeout(function() {
+            btn.className = "btn_unmove"
+        }, 800); 
     }
 }
 
+// FAZ APARECER O INPUT PARA PREENCHER COM O INCREMENTO DA CIFRA DE CESAR
+function componentHidden() { 
+    let caesar = document.getElementById("cipher");
 
-    
-    
-function botao() {
-    if (mensagemEntrada.value.trim() == "") { // TESTA SE O CAMPO MENSAGEM ESTÁ VAZIO
+    if (caesar.checked == true) {
+        document.querySelector("input.input_number_hidden").className = "input_number_visible";
+        increment.value = "";
+    }
+    else {
+        document.querySelector("input.input_number_visible").className = "input_number_hidden";
+    }
+}
+
+function btnFunction() {
+
+    if (messageIn.value.trim() == "") { // TESTA SE O CAMPO "MENSAGEM" ESTÁ VAZIO
         document.getElementById("error").innerHTML = "Preencha o campo (Mensagem)";
     }
     else {
             // CIFRA DE CESAR
-        if (document.getElementById("cifra").checked) {
-            cifra(mensagemEntrada, incremento, mensagemSaida); // CHAMA A FUNÇÃO PARA CRIPTOGRAFAR
-            mensagemSaida.style.width = "250px"; // codigo para abrir a caixa saida
-            mensagemSaida.style.height = "100px";
-            mensagemSaida.style.visibility = "visible";
+        if (document.getElementById("cipher").checked) {
+            cipher(messageIn, increment, messageOut); // CHAMA A FUNÇÃO PARA CODIFICAR/DECODIFICAR
+            messageOut.className = "move_text_out";
+            setTimeout(outputAnimation, 500);
         }
             // BASE64
         else {
-            base(mensagemEntrada, mensagemSaida);
-            mensagemSaida.style.width = "250px"; // codigo para abrir a caixa saida
-            mensagemSaida.style.height = "100px";
-            mensagemSaida.style.visibility = "visible";
+            base(messageIn, messageOut);
+            messageOut.className = "move_text_out";
+            setTimeout(outputAnimation, 500);
         }   
     }
 }
 
+function outputAnimation() { // animação do campo de saida da mensagem
+    let labelCode = document.querySelector("b.b_code");
+
+    labelCode.style.transform = "translate(0, -15%)";
+    labelCode.style.transition = "all 0.5s";
+    labelCode.style.visibility = "visible";
+}
+
 // (CIFRA DE CESAR) - CRIPTOGRAFAR e DESCRIPTOGRAFAR
+function cipher(messageIn, increment, messageOut) {
+    messageIn = messageIn.value;
+    increment = increment.value;
+    var alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
+    var accent = "áàãâäéèêíìîóòôõúùûüç".split("");
+    var message = "";  // variável onde será montado a nova frase (codificada ou decodificada)
+    var fraseLowerCase = messageIn.toLowerCase();
 
-function cifra(mensagemEntrada, incremento, mensagemSaida) {
-    mensagemEntrada = mensagemEntrada.value;
-    incremento = incremento.value;
-    var alfabeto = "abcdefghijklmnopqrstuvwxyz".split("");
-    var acento = "áàãâäéèêíìîóòôõúùûüç".split("");
-    var mensagemPronta = "";  // variável onde será montado a nova frase (codificada ou decodificada)
-    var fraseLowerCase = mensagemEntrada.toLowerCase();
-
-    incremento = incremento % 26;
+    increment = increment % 26;
     for (var index = 0; index < fraseLowerCase.length; index++) {
         var currentLetter = fraseLowerCase[index];
 
         if (currentLetter === " ") {
-            mensagemPronta += currentLetter;
+            message += currentLetter;
             continue;
         }
         // BUSCAR SOLUÇÃO MAIS EFICIENTE PARA ESSE IF.
-        if (acento.includes(currentLetter) === true) { // substitui letras com acento por letras sem acento
+        if (accent.includes(currentLetter) === true) { // substitui letras com acento por letras sem acento
             var currentLetter = currentLetter.replace(/[áàãâä]/i,"a");
             var currentLetter = currentLetter.replace(/[éèê]/i,"e");
             var currentLetter = currentLetter.replace(/[íìî]/i,"i"); 
@@ -84,56 +98,54 @@ function cifra(mensagemEntrada, incremento, mensagemSaida) {
             var currentLetter = currentLetter.replace(/[úùûü]/i,"u"); 
             var currentLetter = currentLetter.replace(/[ç]/i,"c"); 
         }
-        if (alfabeto.includes(currentLetter) == false) { // caso o usuário coloque caracteres especiais ou números, os mesmos serão adicionados a variável "mensagemPronta", sem precisar passar pela tratativa da cifra de cesar.
-            mensagemPronta += currentLetter;
-
+        if (alphabet.includes(currentLetter) == false) { // caso o usuário coloque caracteres especiais ou números, os mesmos serão adicionados a variável "message", sem precisar passar pela tratativa da cifra de cesar.
+        message += currentLetter;
         }
         else{
-            var currentIndex = alfabeto.indexOf(currentLetter);
-            if (document.getElementById("encript").checked) { // VERIFICA SE É PARA ENCRIPTAR OU DECRIPTAR O CÓDIGO
-                var newIndex = parseInt(currentIndex) + parseInt(incremento); // ENCRIPTAR
+            var currentIndex = alphabet.indexOf(currentLetter);
+            if (document.getElementById("code").checked) { // VERIFICA SE É PARA ENCRIPTAR OU DECRIPTAR O CÓDIGO
+                var newIndex = parseInt(currentIndex) + parseInt(increment); // CODIFICAR
             }
             else {
-                var newIndex = parseInt(currentIndex) - parseInt(incremento); // DECRIPTAR
+                var newIndex = parseInt(currentIndex) - parseInt(increment); // DECODIFICAR
             }
             if (newIndex > 25) newIndex = parseInt(newIndex) - 26;
             if (newIndex < 0) newIndex = parseInt(newIndex) + 26;        
-            if (mensagemEntrada[index] === mensagemEntrada[index].toUpperCase()){
-                mensagemPronta += alfabeto[newIndex].toUpperCase();
+            if (messageIn[index] === messageIn[index].toUpperCase()){
+                message += alphabet[newIndex].toUpperCase();
             }
             else {
-                mensagemPronta += alfabeto[newIndex];
+                message += alphabet[newIndex];
             }
         }
-        mensagemSaida.innerHTML = mensagemPronta;
+        messageOut.innerHTML = message;
     }
 }
 
 // (BASE64) CRIPTOGRAFAR e DESCRIPTOGRAFAR
-
-function base(mensagemEntrada, mensagemSaida) {
-    var mensagemEntrada = mensagemEntrada.value;
-    var mensagemPronta = "";
-    if (document.getElementById("encript").checked) { // VERIFICA SE É PARA ENCRIPTAR OU DECRIPTAR O CÓDIGO
-        mensagemPronta = window.btoa(mensagemEntrada);
-        mensagemSaida.innerHTML = mensagemPronta;
+function base(messageIn, messageOut) {
+    var messageIn = messageIn.value;
+    var message = "";
+    if (document.getElementById("code").checked) { // VERIFICA SE É PARA CODIFICAR OU DECODIFICAR O CÓDIGO
+        message = window.btoa(messageIn);
+        messageOut.innerHTML = message;
     }
     else {
-        mensagemPronta = window.atob(mensagemEntrada);
-        mensagemSaida.innerHTML = mensagemPronta;
+        message = window.atob(messageIn);
+        messageOut.innerHTML = message;
     }
 }
 
-
-
 // TIRA MENSAGEM DE ERRO AO CLICAR NO TextArea "MENSAGEM"  + LIMPAR E FECHAR CAIXA DE TEXTO "SAIDA DO CODIGO PRONTO"
-function reseta() {
+function resetTargets() {
+    let labelCode = document.querySelector("b.b_code");
     document.querySelector("p#error").innerHTML = "";
 
-    // codigo para fechar a caixa de saída da mensagem
-    mensagemSaida.style.width = "1px"; 
-    mensagemSaida.style.height = "1px";
-    mensagemSaida.style.visibility = "hidden";
-    mensagemSaida.innerHTML = "";
-
+    labelCode.style.transform = "translate(0, 150%)";
+    labelCode.style.transition = "all 0.5s";
+    labelCode.style.visibility = "hidden";
+    setTimeout(function() {
+            messageOut.className = "text_area_out";
+        }, 500);
+    messageOut.innerHTML = "";
 }
