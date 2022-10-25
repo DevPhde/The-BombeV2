@@ -1,4 +1,3 @@
-
 let messageIn = document.getElementById("text_in");
 let messageOut = document.getElementById("text_out");
 let increment = document.getElementById("increment");
@@ -6,41 +5,46 @@ let messageCode = document.querySelector(".text_output")
 
 
 // modifica o nome do botao ao clicar no radio + animação sumir e aparecer
-function buttonAnimation() { 
+function buttonAnimation() {
     let encript = document.getElementById("code");
     let btn = document.getElementById("btn");
-    
-    if (encript.checked == true) {
-        btn.className = "btn_move";  
-        setTimeout(function() { 
+
+    if (encript.checked) {
+        btn.className = "btn_move";
+        setTimeout(function () {
             btn.innerHTML = "Codificar"
         }, 500);
-        setTimeout(function() {
+        setTimeout(function () {
             btn.className = "btn_unmove"
-        }, 800); 
+        }, 800);
     }
     else {
         btn.className = "btn_move";
-        setTimeout(function() { 
+        setTimeout(function () {
             btn.innerHTML = "Decodificar"
         }, 500);
-        setTimeout(function() {
+        setTimeout(function () {
             btn.className = "btn_unmove"
-        }, 800); 
+        }, 800);
     }
 }
 
 // FAZ APARECER O INPUT PARA PREENCHER COM O INCREMENTO DA CIFRA DE CESAR
-function componentHidden() { 
+function componentHidden() {
     let caesar = document.getElementById("cipher");
-
-    if (caesar.checked == true) {
-        document.querySelector("input.input_number_hidden").className = "input_number_visible";
-        increment.value = "";
+    /**
+     * [FUNCÃO PARA APARECER E SUMIR O INPUT "INCREMENTO"]
+     * @param  {[string]} arg1 [identificador da classe no DOM]
+     * @param  {[string]} arg2 [modificador da classe]
+     * @return {[boolean]}      [atribui string vazia ao incremento ""]
+     */
+    function querySelector(queryValue, classNameValue, isIncrementValue) {
+        document.querySelector(queryValue).className = classNameValue;
+        if (isIncrementValue) {
+            increment.value = ""; // ZERA O INPUT "INCREMENTO"
+        }
     }
-    else {
-        document.querySelector("input.input_number_visible").className = "input_number_hidden";
-    }
+    caesar.checked ? querySelector("input.input_number_hidden", "input_number_visible", true) : querySelector("input.input_number_visible", "input_number_hidden", false);
 }
 
 function btnFunction() {
@@ -49,23 +53,23 @@ function btnFunction() {
         document.getElementById("error").innerHTML = "Preencha o campo (Mensagem)";
     }
     else {
-            // CIFRA DE CESAR
+        // CIFRA DE CESAR
         if (document.getElementById("cipher").checked) {
-            if (increment.value == "") { 
+            if (increment.value == "") {
                 document.getElementById("error_increment").innerHTML = "Preencha com o Incremento";
-            }    
-            else {       
-            cipher(messageIn, increment, messageOut); // CHAMA A FUNÇÃO PARA CODIFICAR/DECODIFICAR
-            messageOut.className = "move_text_out";
-            setTimeout(outputAnimation, 500);
+            }
+            else {
+                cipher(messageIn, increment, messageOut); // CHAMA A FUNÇÃO PARA CODIFICAR/DECODIFICAR
+                messageOut.className = "move_text_out";
+                setTimeout(outputAnimation, 500);
             }
         }
-            // BASE64
+        // BASE64
         else {
             base(messageIn, messageOut);
             messageOut.className = "move_text_out";
             setTimeout(outputAnimation, 500);
-        }   
+        }
     }
 }
 
@@ -81,47 +85,39 @@ function outputAnimation() { // animação do campo de saida da mensagem
 function cipher(messageIn, increment, messageOut) {
     messageIn = messageIn.value;
     increment = increment.value;
-    var alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
-    var accent = "áàãâäéèêíìîóòôõúùûüç".split("");
-    var message = "";  // variável onde será montado a nova frase (codificada ou decodificada)
-    var fraseLowerCase = messageIn.toLowerCase();
+    let alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
+    let accent = "áàãâäåéèêëíìîïóòôõúùûüçæñœ".split("");
+    let message = "";  // variável onde será montado a nova frase (codificada ou decodificada)
+    let phraseLowerCase = messageIn.toLowerCase();
 
     increment = increment % 26;
-    for (var index = 0; index < fraseLowerCase.length; index++) {
-        var currentLetter = fraseLowerCase[index];
+    for (let index = 0; index < phraseLowerCase.length; index++) {
+        let currentLetter = phraseLowerCase[index];
 
         if (currentLetter === " ") {
             message += currentLetter;
             continue;
         }
-        // BUSCAR SOLUÇÃO MAIS EFICIENTE PARA ESSE IF.
-        if (accent.includes(currentLetter) === true) { // substitui letras com acento por letras sem acento
-            var currentLetter = currentLetter.replace(/[áàãâä]/i,"a");
-            var currentLetter = currentLetter.replace(/[éèê]/i,"e");
-            var currentLetter = currentLetter.replace(/[íìî]/i,"i"); 
-            var currentLetter = currentLetter.replace(/[óòôõ]/i,"o"); 
-            var currentLetter = currentLetter.replace(/[úùûü]/i,"u"); 
-            var currentLetter = currentLetter.replace(/[ç]/i,"c"); 
+        if (accent.includes(currentLetter)) { // substitui letras com acento por letras sem acento
+            let = currentLetter;
+            let non_asciis = { 'a': '[àáâãäå]', 'ae': 'æ', 'c': 'ç', 'e': '[èéêë]', 'i': '[ìíîï]', 'n': 'ñ', 'o': '[òóôõö]', 'oe': 'œ', 'u': '[ùúûűü]' };
+            for (i in non_asciis) { currentLetter = currentLetter.replace(new RegExp(non_asciis[i], 'g'), i); }
+
         }
         if (alphabet.includes(currentLetter) == false) { // caso o usuário coloque caracteres especiais ou números, os mesmos serão adicionados a variável "message", sem precisar passar pela tratativa da cifra de cesar.
-        message += currentLetter;
+            message += currentLetter;
         }
-        else{
-            var currentIndex = alphabet.indexOf(currentLetter);
-            if (document.getElementById("code").checked) { // VERIFICA SE É PARA ENCRIPTAR OU DECRIPTAR O CÓDIGO
-                var newIndex = parseInt(currentIndex) + parseInt(increment); // CODIFICAR
-            }
-            else {
-                var newIndex = parseInt(currentIndex) - parseInt(increment); // DECODIFICAR
-            }
+        else {
+            let currentIndex = alphabet.indexOf(currentLetter);
+            /** VERIFICA SE É PARA ENCRIPTAR OU DECRIPTAR O CÓDIGO */
+            let checked = document.getElementById("code").checked
+            let newIndex = checked ? (parseInt(currentIndex) + parseInt(increment)) : (parseInt(currentIndex) - parseInt(increment));
+
             if (newIndex > 25) newIndex = parseInt(newIndex) - 26;
-            if (newIndex < 0) newIndex = parseInt(newIndex) + 26;        
-            if (messageIn[index] === messageIn[index].toUpperCase()){
-                message += alphabet[newIndex].toUpperCase();
-            }
-            else {
-                message += alphabet[newIndex];
-            }
+            if (newIndex < 0) newIndex = parseInt(newIndex) + 26;
+
+            let isMessageUpperCased = messageIn[index] === messageIn[index].toUpperCase()
+            isMessageUpperCased ? message += alphabet[newIndex].toUpperCase() : message += alphabet[newIndex];
         }
         messageOut.innerHTML = message;
     }
@@ -129,38 +125,34 @@ function cipher(messageIn, increment, messageOut) {
 
 // (BASE64) CRIPTOGRAFAR e DESCRIPTOGRAFAR
 function base(messageIn, messageOut) {
-    var messageIn = messageIn.value;
-    var message = "";
-    if (document.getElementById("code").checked) { // VERIFICA SE É PARA CODIFICAR OU DECODIFICAR O CÓDIGO
-        message = window.btoa(messageIn);
-        messageOut.innerHTML = message;
-    }
-    else {
-        message = window.atob(messageIn);
-        messageOut.innerHTML = message;
-    }
+    messageIn = messageIn.value;
+    let message = "";
+    let isCodeChecked = document.getElementById("code").checked
+
+    isCodeChecked ? message = window.btoa(messageIn) : message = window.atob(messageIn); // TESTA SE IRÁ CODIFICAR OU DECODIFICAR
+    messageOut.innerHTML = message;
 }
 
 // TIRA MENSAGEM DE ERRO
 let text = document.getElementById("text_in");
-text.addEventListener("click", (function(){
+text.addEventListener("click", (function () {
     document.getElementById("error").innerHTML = "";
+    resetTarget();
 }));
-increment.addEventListener("click", (function(){
+increment.addEventListener("click", (function () {
     document.getElementById("error_increment").innerHTML = "";
 }));
 
 // TIRA MENSAGEM DE ERRO + LIMPAR E FECHAR CAIXA DE TEXTO "SAIDA DO CODIGO PRONTO"
-// function resetTargets() {
-//     let labelCode = document.querySelector("b.b_code");
+function resetTarget() {
+    let labelCode = document.querySelector("b.b_code");
 
-//     console.log(pe);
-//     // SOME A CAIXA DE SAÍDA DO CODIGO
-//     labelCode.style.transform = "translate(0, 150%)";
-//     labelCode.style.transition = "all 0.5s";
-//     labelCode.style.visibility = "hidden";
-//     setTimeout(function() {
-//             messageOut.className = "text_area_out";
-//         }, 500);
-//     messageOut.innerHTML = "";
-// }
+    // SOME A CAIXA DE SAÍDA DO CODIGO
+    labelCode.style.transform = "translate(0, 150%)";
+    labelCode.style.transition = "all 0.5s";
+    labelCode.style.visibility = "hidden";
+    setTimeout(function () {
+        messageOut.className = "text_area_out";
+    }, 500);
+    messageOut.innerHTML = "";
+}
