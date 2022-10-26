@@ -8,36 +8,21 @@ let messageCode = document.querySelector(".text_output")
 function buttonAnimation() {
     let encript = document.getElementById("code");
     let btn = document.getElementById("btn");
+    btn.className = "btn_move";
+    let innerHtmlValue = encript.checked ? "Codificar" : "Decodificar";
 
-    if (encript.checked) {
-        btn.className = "btn_move";
-        setTimeout(function () {
-            btn.innerHTML = "Codificar"
-        }, 500);
-        setTimeout(function () {
-            btn.className = "btn_unmove"
-        }, 800);
-    }
-    else {
-        btn.className = "btn_move";
-        setTimeout(function () {
-            btn.innerHTML = "Decodificar"
-        }, 500);
-        setTimeout(function () {
-            btn.className = "btn_unmove"
-        }, 800);
-    }
+    setTimeout(function () {
+        btn.innerHTML = innerHtmlValue;
+    }, 500);
+    setTimeout(function () {
+        btn.className = "btn_unmove"
+    }, 800);
 }
 
 // FAZ APARECER O INPUT PARA PREENCHER COM O INCREMENTO DA CIFRA DE CESAR
 function componentHidden() {
     let caesar = document.getElementById("cipher");
-    /**
-     * [FUNCÃO PARA APARECER E SUMIR O INPUT "INCREMENTO"]
-     * @param  {[string]} arg1 [identificador da classe no DOM]
-     * @param  {[string]} arg2 [modificador da classe]
-     * @return {[boolean]}      [atribui string vazia ao incremento ""]
-     */
+
     function querySelector(queryValue, classNameValue, isIncrementValue) {
         document.querySelector(queryValue).className = classNameValue;
         if (isIncrementValue) {
@@ -48,27 +33,27 @@ function componentHidden() {
 }
 
 function btnFunction() {
+    function setInnerHtml(elementById, innerHtmlValue) {
+        document.getElementById(elementById).innerHTML = innerHtmlValue;
+    }
+    function setDecodifyAndClassName(classNameValue, isCipher) {
+        isCipher ? cipher(messageIn, increment, messageOut) : base(messageIn, messageOut); 
+        messageOut.className = classNameValue;
+        setTimeout(outputAnimation, 500);
+    }
 
     if (messageIn.value.trim() == "") { // TESTA SE O CAMPO "MENSAGEM" ESTÁ VAZIO
-        document.getElementById("error").innerHTML = "Preencha o campo (Mensagem)";
+        setInnerHtml("error","Preencha o campo (Mensagem)");
     }
-    else {
+    else { 
         // CIFRA DE CESAR
         if (document.getElementById("cipher").checked) {
-            if (increment.value == "") {
-                document.getElementById("error_increment").innerHTML = "Preencha com o Incremento";
-            }
-            else {
-                cipher(messageIn, increment, messageOut); // CHAMA A FUNÇÃO PARA CODIFICAR/DECODIFICAR
-                messageOut.className = "move_text_out";
-                setTimeout(outputAnimation, 500);
-            }
+            let isEmptyValue = (increment.value == "")
+            isEmptyValue ? setInnerHtml("error_increment", "Preencha com o Incremento") : setDecodifyAndClassName("move_text_out", true);
         }
         // BASE64
         else {
-            base(messageIn, messageOut);
-            messageOut.className = "move_text_out";
-            setTimeout(outputAnimation, 500);
+            setDecodifyAndClassName("move_text_out", false);
         }
     }
 }
@@ -102,14 +87,13 @@ function cipher(messageIn, increment, messageOut) {
             let = currentLetter;
             let non_asciis = { 'a': '[àáâãäå]', 'ae': 'æ', 'c': 'ç', 'e': '[èéêë]', 'i': '[ìíîï]', 'n': 'ñ', 'o': '[òóôõö]', 'oe': 'œ', 'u': '[ùúûűü]' };
             for (i in non_asciis) { currentLetter = currentLetter.replace(new RegExp(non_asciis[i], 'g'), i); }
-
         }
         if (alphabet.includes(currentLetter) == false) { // caso o usuário coloque caracteres especiais ou números, os mesmos serão adicionados a variável "message", sem precisar passar pela tratativa da cifra de cesar.
             message += currentLetter;
         }
         else {
             let currentIndex = alphabet.indexOf(currentLetter);
-            /** VERIFICA SE É PARA ENCRIPTAR OU DECRIPTAR O CÓDIGO */
+            // VERIFICA SE É PARA ENCRIPTAR OU DECRIPTAR O CÓDIGO 
             let checked = document.getElementById("code").checked
             let newIndex = checked ? (parseInt(currentIndex) + parseInt(increment)) : (parseInt(currentIndex) - parseInt(increment));
 
@@ -122,7 +106,6 @@ function cipher(messageIn, increment, messageOut) {
         messageOut.innerHTML = message;
     }
 }
-
 // (BASE64) CRIPTOGRAFAR e DESCRIPTOGRAFAR
 function base(messageIn, messageOut) {
     messageIn = messageIn.value;
@@ -132,7 +115,6 @@ function base(messageIn, messageOut) {
     isCodeChecked ? message = window.btoa(messageIn) : message = window.atob(messageIn); // TESTA SE IRÁ CODIFICAR OU DECODIFICAR
     messageOut.innerHTML = message;
 }
-
 // TIRA MENSAGEM DE ERRO
 let text = document.getElementById("text_in");
 text.addEventListener("click", (function () {
@@ -142,7 +124,6 @@ text.addEventListener("click", (function () {
 increment.addEventListener("click", (function () {
     document.getElementById("error_increment").innerHTML = "";
 }));
-
 // TIRA MENSAGEM DE ERRO + LIMPAR E FECHAR CAIXA DE TEXTO "SAIDA DO CODIGO PRONTO"
 function resetTarget() {
     let labelCode = document.querySelector("b.b_code");
@@ -155,4 +136,15 @@ function resetTarget() {
         messageOut.className = "text_area_out";
     }, 500);
     messageOut.innerHTML = "";
+}
+// MODAL
+const toggleModal = () => {
+    const bodyClassList = document.body.classList;
+    let isOpen = bodyClassList.contains("open");
+    isOpen ? bodyClassList.remove("scrollOff", "open") : bodyClassList.add("scrollOff", "open"); 
+  }
+  let span = document.getElementsByClassName("close")[0];
+  span.onclick = function() {
+    const bodyClassList = document.body.classList;
+    bodyClassList.remove("scrollOff", "open");
 }
