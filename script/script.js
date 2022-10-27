@@ -57,39 +57,29 @@ function btnFunction() {
         }
     }
 }
-
-function outputAnimation() { // animação do campo de saida da mensagem
-    let labelCode = document.querySelector("b.b_code");
-
-    labelCode.style.transform = "translate(0, -15%)";
-    labelCode.style.transition = "all 0.5s";
-    labelCode.style.visibility = "visible";
-}
-
 // (CIFRA DE CESAR) - CRIPTOGRAFAR e DESCRIPTOGRAFAR
 function cipher(messageIn, increment, messageOut) {
     messageIn = messageIn.value;
     increment = increment.value;
     let alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
-    let accent = "áàãâäåéèêëíìîïóòôõúùûüçæñœ".split("");
-    let message = "";  // variável onde será montado a nova frase (codificada ou decodificada)
-    let phraseLowerCase = messageIn.toLowerCase();
+    let lettersWithAccent = "áàãâäåéèêëíìîïóòôõúùûüçæñœ".split("");
+    let cipherMessage = "";  // variável onde será montado a nova frase (codificada ou decodificada)
+    let messageInLowerCased = messageIn.toLowerCase();
 
     increment = increment % 26;
-    for (let index = 0; index < phraseLowerCase.length; index++) {
-        let currentLetter = phraseLowerCase[index];
+    for (let index = 0; index < messageInLowerCased.length; index++) {
+        let currentLetter = messageInLowerCased[index];
 
         if (currentLetter === " ") {
-            message += currentLetter;
+            cipherMessage += currentLetter;
             continue;
         }
-        if (accent.includes(currentLetter)) { // substitui letras com acento por letras sem acento
-            let = currentLetter;
+        if (lettersWithAccent.includes(currentLetter)) { // substitui letras com acento por letras sem acento
             let non_asciis = { 'a': '[àáâãäå]', 'ae': 'æ', 'c': 'ç', 'e': '[èéêë]', 'i': '[ìíîï]', 'n': 'ñ', 'o': '[òóôõö]', 'oe': 'œ', 'u': '[ùúûűü]' };
             for (i in non_asciis) { currentLetter = currentLetter.replace(new RegExp(non_asciis[i], 'g'), i); }
         }
         if (alphabet.includes(currentLetter) == false) { // caso o usuário coloque caracteres especiais ou números, os mesmos serão adicionados a variável "message", sem precisar passar pela tratativa da cifra de cesar.
-            message += currentLetter;
+            cipherMessage += currentLetter;
         }
         else {
             let currentIndex = alphabet.indexOf(currentLetter);
@@ -101,19 +91,26 @@ function cipher(messageIn, increment, messageOut) {
             if (newIndex < 0) newIndex = parseInt(newIndex) + 26;
 
             let isMessageUpperCased = messageIn[index] === messageIn[index].toUpperCase()
-            isMessageUpperCased ? message += alphabet[newIndex].toUpperCase() : message += alphabet[newIndex];
+            isMessageUpperCased ? cipherMessage += alphabet[newIndex].toUpperCase() : cipherMessage += alphabet[newIndex];
         }
-        messageOut.innerHTML = message;
+        messageOut.innerHTML = cipherMessage;
     }
 }
 // (BASE64) CRIPTOGRAFAR e DESCRIPTOGRAFAR
 function base(messageIn, messageOut) {
     messageIn = messageIn.value;
-    let message = "";
+    let baseMessage = "";
     let isCodeChecked = document.getElementById("code").checked
 
-    isCodeChecked ? message = window.btoa(messageIn) : message = window.atob(messageIn); // TESTA SE IRÁ CODIFICAR OU DECODIFICAR
-    messageOut.innerHTML = message;
+    isCodeChecked ? baseMessage = window.btoa(messageIn) : baseMessage = window.atob(messageIn); // TESTA SE IRÁ CODIFICAR OU DECODIFICAR
+    messageOut.innerHTML = baseMessage;
+}
+function outputAnimation() { // animação do campo de saida da mensagem
+    let labelCode = document.querySelector("b.b_code");
+
+    labelCode.style.transform = "translate(0, -15%)";
+    labelCode.style.transition = "all 0.5s";
+    labelCode.style.visibility = "visible";
 }
 // TIRA MENSAGEM DE ERRO
 let text = document.getElementById("text_in");
