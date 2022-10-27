@@ -21,6 +21,7 @@ header {
     margin: 10px 150px;
 
 }
+
 /* END HEADER */
 
 /* MAIN */
@@ -44,9 +45,11 @@ fieldset {
     border: solid #9A86FD;
     border-radius: 10px;
     margin: auto;
-} 
+}
 
-fieldset:hover, .text_area_in:hover, .move_text_out:hover {
+fieldset:hover,
+.text_area_in:hover,
+.move_text_out:hover {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 #9A86FD;
     transition: all 0.5s;
 }
@@ -57,7 +60,7 @@ fieldset:hover, .text_area_in:hover, .move_text_out:hover {
     display: flex;
     justify-content: space-evenly;
     align-items: baseline;
-    
+
 }
 
 .radios_quality {
@@ -86,10 +89,10 @@ fieldset:hover, .text_area_in:hover, .move_text_out:hover {
 }
 
 .text_area_in {
-    border:solid #9A86FD;
+    border: solid #9A86FD;
     width: 250px;
     height: 150px;
-    border-radius: 50px;    
+    border-radius: 50px;
     padding: 20px;
     outline: none;
     resize: none;
@@ -100,30 +103,30 @@ fieldset:hover, .text_area_in:hover, .move_text_out:hover {
 .error {
     justify-content: end;
     padding: 15px 0 5px 0;
-    color: red; 
+    color: red;
     text-align: center;
 }
 
 .text_area_out {
-    border:solid #9A86FD;
+    border: solid #9A86FD;
     width: 20px;
     height: 20px;
-    border-radius: 50%;    
+    border-radius: 50%;
     padding: 0px;
     outline: none;
     resize: none;
     color: black;
-    overflow:hidden;
+    overflow: hidden;
     /* HIDDEN FUNCTION */
     transition: all 0.5s;
     visibility: hidden;
 }
 
 .move_text_out {
-    border:solid #9A86FD;
+    border: solid #9A86FD;
     width: 250px;
     height: 150px;
-    border-radius: 50px;    
+    border-radius: 50px;
     padding: 20px;
     outline: none;
     resize: none;
@@ -156,20 +159,30 @@ fieldset:hover, .text_area_in:hover, .move_text_out:hover {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 #9A86FD;
     color: white;
     animation: pulsate 1.2s ease-out infinite;
-    
+
 }
 
-@-webkit-keyframes pulsate { /* PULSAR */
-    0%   { box-shadow: 0 0 0 #9A86FD; }
-    50%  { box-shadow: 0 0 17px #9A86FD; }
-    100% { box-shadow: 0 0 0 #9A86FD; }
+@-webkit-keyframes pulsate {
+
+    /* PULSAR */
+    0% {
+        box-shadow: 0 0 0 #9A86FD;
+    }
+
+    50% {
+        box-shadow: 0 0 17px #9A86FD;
+    }
+
+    100% {
+        box-shadow: 0 0 0 #9A86FD;
+    }
 }
 
 .input_number_hidden {
     visibility: hidden;
     transition: all 0.5s;
     width: 1px;
-    height: 1px;   
+    height: 1px;
 }
 
 .input_number_visible::placeholder {
@@ -183,7 +196,8 @@ fieldset:hover, .text_area_in:hover, .move_text_out:hover {
     opacity: 1;
 }
 
-.input_number_visible:focus, .input_number_visible:not(:placeholder-shown) {
+.input_number_visible:focus,
+.input_number_visible:not(:placeholder-shown) {
     width: 150px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 #F0E68C;
     animation: pulsate 0s ease-out infinite;
@@ -191,13 +205,17 @@ fieldset:hover, .text_area_in:hover, .move_text_out:hover {
 }
 
 /* remove o seletor de numeros do input "INCREMENTO" (CHROME, IE, MOZILA, SAFARI) */
-.input_number_visible::-webkit-outer-spin-button, .input_number_visible::-webkit-inner-spin-button { /*IE,CHROME, SAFARI */
+.input_number_visible::-webkit-outer-spin-button,
+.input_number_visible::-webkit-inner-spin-button {
+    /*IE,CHROME, SAFARI */
     -webkit-appearance: none;
 }
-  
-.input_number_visible[type=number] { /* MOZILA */
+
+.input_number_visible[type=number] {
+    /* MOZILA */
     -moz-appearance: textfield;
 }
+
 /* END INCREMENT INPUT*/
 
 /* BUTTON */
@@ -238,14 +256,15 @@ fieldset:hover, .text_area_in:hover, .move_text_out:hover {
     transition: all 1.5s;
     background-color: aliceblue;
 }
+
 /*END BUTTON */
 
 /* END MAIN */
 
-/* FOOTER */ 
+/* FOOTER */
 
 footer {
-    border:solid #9A86FD 1px;
+    border: solid #9A86FD 1px;
     border-top: solid #9A86FD 1px;
     margin: 50px 0 30px 0;
     border-radius: 50px;
@@ -259,7 +278,7 @@ img {
 
 img:hover {
     width: 30px;
-    
+
 }
 
 .foot {
@@ -275,7 +294,7 @@ img:hover {
 
 /* END FOOTER */
 
-/* modal */
+/* MODAL */
 
 .button_modal {
     font-family: inherit;
@@ -286,22 +305,24 @@ img:hover {
     border-radius: 8px;
     padding: 20px 36px;
     font-size: 16px;
-  }
-  
-  @keyframes background-in {
+}
+
+@keyframes background-in {
     0% {
-      scale: 0 0.005;
+        scale: 0 0.005;
     }
+
     33% {
-      scale: 1 0.005;
+        scale: 1 0.005;
     }
+
     66%,
     100% {
-      scale: 1 1;
+        scale: 1 1;
     }
-  }
-  
-  .modal-background {
+}
+
+.modal-background {
     position: fixed;
     top: 0;
     left: 0;
@@ -314,29 +335,31 @@ img:hover {
     transform: scale(1, 1);
     background: rgba(0, 0, 0, 0.5);
     transition: 0.5s;
-  }
-  
-  body.open .modal-background {
+}
+
+body.open .modal-background {
     visibility: visible;
     opacity: 1;
     animation: background-in 1s both;
-  }
-  
-  @keyframes modal-in {
+}
+
+@keyframes modal-in {
+
     0%,
     66% {
-      opacity: 0;
-      visibility: hidden;
-      translate: -50% -30%;
+        opacity: 0;
+        visibility: hidden;
+        translate: -50% -30%;
     }
+
     100% {
-      opacity: 1;
-      visibility: visible;
-      
+        opacity: 1;
+        visibility: visible;
+
     }
-  }
-  
-  .modal {
+}
+
+.modal {
     position: fixed;
     top: 50%;
     left: 50%;
@@ -349,52 +372,52 @@ img:hover {
     opacity: 0;
     visibility: hidden;
     transition: 0.3s;
-  }
-  
-  body.open .modal {
+}
+
+body.open .modal {
     opacity: 1;
     visibility: visible;
     animation: modal-in 1s;
-  }
-  
-  body.closed .modal {
+}
+
+body.closed .modal {
     opacity: 0;
     visibility: hidden;
     translate: -50% -50%;
-  }
-  
-  .modal h2{
+}
+
+.modal h2 {
     margin: 0 0 8px;
     font-weight: 400;
     font-size: 21px;
-  }
-  
-  .modal b {
+}
+
+.modal b {
     color: white;
-  }
-  
-  .modal p {
+}
+
+.modal p {
     margin: 0;
     color: rgba(255, 255, 255, 0.5);
-  }
-  
-  .scrollOff {
+}
+
+.scrollOff {
     overflow: hidden;
-  }
-  
-  .close {
+}
+
+.close {
     color: #aaaaaa;
     float: right;
     font-size: 28px;
     font-weight: bold;
-  }
-  
-  .close:hover,
-  .close:focus {
+}
+
+.close:hover,
+.close:focus {
     color: rgb(140, 60, 231);
     text-decoration: none;
     cursor: pointer;
-  }
+}
 
 /* END MODAL */
 
@@ -402,6 +425,7 @@ img:hover {
     footer {
         margin: 300px 0 30px 0;
     }
+
     main {
         width: 950px;
         height: 600px;
@@ -412,6 +436,7 @@ img:hover {
     footer {
         margin: 200px 0 30px 0;
     }
+
     main {
         width: 750px;
         height: 600px;
@@ -422,6 +447,7 @@ img:hover {
     footer {
         margin: 250px 0 30px 0;
     }
+
     .header_div_quality {
         margin: 10px 50px;
     }
@@ -437,6 +463,7 @@ img:hover {
     footer {
         margin: 100px 0 30px 0;
     }
+
     .header_div_quality {
         margin: 10px 20px;
     }
@@ -502,7 +529,7 @@ img:hover {
         flex-direction: column;
         align-items: center;
     }
-    
+
 }
 
 @media only screen and (max-width: 370px) {
@@ -510,6 +537,7 @@ img:hover {
         font-size: 12px;
 
     }
+
     .modal {
         width: 160px !important;
     }
@@ -537,9 +565,11 @@ img:hover {
         height: 970px;
         padding: 5px;
     }
+
     .text_area_in {
         width: 200px;
     }
+
     .move_text_out {
         width: 200px;
     }
@@ -552,4 +582,4 @@ img:hover {
         text-align: center;
 
     }
-}  
+}

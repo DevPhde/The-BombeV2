@@ -37,15 +37,15 @@ function btnFunction() {
         document.getElementById(elementById).innerHTML = innerHtmlValue;
     }
     function setDecodifyAndClassName(classNameValue, isCipher) {
-        isCipher ? cipher(messageIn, increment, messageOut) : base(messageIn, messageOut); 
+        isCipher ? cipher(messageIn, increment, messageOut) : base(messageIn, messageOut);
         messageOut.className = classNameValue;
         setTimeout(outputAnimation, 500);
     }
 
     if (messageIn.value.trim() == "") { // TESTA SE O CAMPO "MENSAGEM" ESTÁ VAZIO
-        setInnerHtml("error","Preencha o campo (Mensagem)");
+        setInnerHtml("error", "Preencha o campo (Mensagem)");
     }
-    else { 
+    else {
         // CIFRA DE CESAR
         if (document.getElementById("cipher").checked) {
             let isEmptyValue = (increment.value == "")
@@ -141,10 +141,10 @@ function resetTarget() {
 const toggleModal = () => {
     const bodyClassList = document.body.classList;
     let isOpen = bodyClassList.contains("open");
-    isOpen ? bodyClassList.remove("scrollOff", "open") : bodyClassList.add("scrollOff", "open"); 
-  }
-  let span = document.getElementsByClassName("close")[0];
-  span.onclick = function() {
+    isOpen ? bodyClassList.remove("scrollOff", "open") : bodyClassList.add("scrollOff", "open");
+}
+let span = document.getElementsByClassName("close")[0];
+span.onclick = function () {
     const bodyClassList = document.body.classList;
     bodyClassList.remove("scrollOff", "open");
 }
