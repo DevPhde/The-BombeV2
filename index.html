@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <link rel="stylesheet" href="./css/style.css">
     <meta charset="UTF-8">
@@ -7,25 +8,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Bombe V2</title>
 </head>
+
 <body>
-    
-<header>
-    <div class="header_div_quality">
-        <h2>The Bombe V2</h2>
-    </div>
-    <div>
-        <button onclick="toggleModal()" type="button" class="modal_button button">Instruções</button>
-    </div>
-</header>
-<main>
-    <div class="modal-background" onclick="toggleModal()"></div>
-    <div class="modal">
-      <span class="close">&times;</span>
-      <h2>Cifra de Cesar</h2>     
-      <p><b>Como utilizar:</b> Basta escolher o modo (codificar ou decodificar), preencher com sua mensagem,escolher o incremento e clicar no botão abaixo.<p>
-      <br><h2>Base64</h2>
-      <br><p><b>Como Utilizar:</b> Selecione o modo (codificar ou decodificar), preencha com a mensagem e clique no botão abaixo.</p>   
-    </div>
+
+    <header>
+        <div class="header_div_quality">
+            <h2>The Bombe V2</h2>
+        </div>
+        <div>
+            <button onclick="toggleModal()" type="button" class="modal_button button">Instruções</button>
+        </div>
+    </header>
+    <main>
+        <div class="modal-background" onclick="toggleModal()"></div>
+        <div class="modal">
+            <span class="close">&times;</span>
+            <h2>Cifra de Cesar</h2>
+            <p><b>Como utilizar:</b> Basta escolher o modo (codificar ou decodificar), preencher com sua
+                mensagem,escolher o incremento e clicar no botão abaixo.
+            <p>
+                <br>
+            <h2>Base64</h2>
+            <br>
+            <p><b>Como Utilizar:</b> Selecione o modo (codificar ou decodificar), preencha com a mensagem e clique no
+                botão abaixo.</p>
+        </div>
         <form>
             <div class="content">
                 <section>
@@ -45,7 +52,8 @@
                         <textarea class="text_area_in" id="text_in"></textarea>
                         <p class="error" id="error"></p>
                         <div class="input_number">
-                            <input type="number" class="input_number_hidden" id="increment" placeholder="Insira o Incremento...">
+                            <input type="number" class="input_number_hidden" id="increment"
+                                placeholder="Insira o Incremento...">
                             <p class="error" id="error_increment"></p>
                         </div>
                     </div>
@@ -72,7 +80,7 @@
                 <button type="button" class="button btn_" id="btn" onclick="btnFunction()">Codificar</button>
             </div>
         </form>
-    </main>  
+    </main>
     <footer>
         <div class="foot">
             <p>Desenvolvido por: <b>Diego Baumbach</b> &copy;</p>
@@ -83,4 +91,5 @@
     </footer>
 </body>
 <script src="./script/script.js" defer></script>
+
 </html>
