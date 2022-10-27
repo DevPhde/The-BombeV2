@@ -18,6 +18,7 @@
 <img align="left" height="35em" alt="HTML" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original.svg">
 <img align="left" height="35em" alt="CSS" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original.svg">
 <img align="left" height="35em" alt="JS" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-plain.svg"><br>
+<br>
 
   ## Diferenciais deste projeto
   <p> Foi implementado neste projeto as boas práticas de programação e novas técnicas aprendidas de forma autônoma, como por exemplo:</p>
