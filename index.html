@@ -36,15 +36,13 @@
         <form>
             <div class="content">
                 <section>
-                    <fieldset>
+                    <fieldset class="field_type">
                         <legend><b>Tipo</b></legend>
-                        <div class="radios_quality">
-                            <input type="radio" name="type" id="cipher" onclick="componentHidden()">
-                            <label for="cipher">Cifra de Cesar</label>
-                        </div>
-                        <div>
-                            <input type="radio" name="type" id="base" onclick="componentHidden()" checked>
-                            <label for="base">Base64</label>
+                        <div class="select">
+                            <select onchange="componentHidden()">
+                                <option id="cipher">Cifra de Cesar</option>
+                                <option id="base" selected>Base64</option>
+                            </select>
                         </div>
                     </fieldset>
                     <div class="text_enter">

@@ -1,7 +1,6 @@
 let messageIn = document.getElementById("text_in");
 let messageOut = document.getElementById("text_out");
 let increment = document.getElementById("increment");
-let messageCode = document.querySelector(".text_output")
 
 
 // modifica o nome do botao ao clicar no radio + animação sumir e aparecer
@@ -29,8 +28,9 @@ function componentHidden() {
             increment.value = ""; // ZERA O INPUT "INCREMENTO"
         }
     }
-    caesar.checked ? querySelector("input.input_number_hidden", "input_number_visible", true) : querySelector("input.input_number_visible", "input_number_hidden", false);
+    caesar.selected ? querySelector("input.input_number_hidden", "input_number_visible", true) : querySelector("input.input_number_visible", "input_number_hidden", false);
 }
+
 
 function btnFunction() {
     function setInnerHtml(elementById, innerHtmlValue) {
@@ -47,7 +47,7 @@ function btnFunction() {
     }
     else {
         // CIFRA DE CESAR
-        if (document.getElementById("cipher").checked) {
+        if (document.getElementById("cipher").selected) {
             let isEmptyValue = (increment.value == "")
             isEmptyValue ? setInnerHtml("error_increment", "Preencha com o Incremento") : setDecodifyAndClassName("move_text_out", true);
         }
@@ -118,7 +118,7 @@ text.addEventListener("click", (function () {
     document.getElementById("error").innerHTML = "";
     resetTarget();
 }));
-increment.addEventListener("click", (function () {
+    increment.addEventListener("click", (function () {
     document.getElementById("error_increment").innerHTML = "";
 }));
 // TIRA MENSAGEM DE ERRO + LIMPAR E FECHAR CAIXA DE TEXTO "SAIDA DO CODIGO PRONTO"

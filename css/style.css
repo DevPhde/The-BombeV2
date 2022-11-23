@@ -54,6 +54,34 @@ fieldset:hover,
     transition: all 0.5s;
 }
 
+/* SELECT */
+  select {
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+    border: 0;
+    outline: 0;
+    font: inherit;
+    width: 20em;
+    height: 3em;
+    padding: 0 4em 0 1em;
+    background: url(https://upload.wikimedia.org/wikipedia/commons/9/9d/Caret_down_font_awesome_whitevariation.svg) no-repeat right 0.8em center/1.4em;
+    color: white;
+    border-radius: 0.25em;
+    cursor: pointer;
+  }
+  select option {
+    color: inherit;
+    background-color: #2A2734;
+  }
+  select:focus {
+    outline: none;
+  }
+  select::-ms-expand {
+    display: none;
+  }
+
+
 /*radios*/
 
 .content {
@@ -159,7 +187,6 @@ fieldset:hover,
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 #9A86FD;
     color: white;
     animation: pulsate 1.2s ease-out infinite;
-
 }
 
 @-webkit-keyframes pulsate {
@@ -208,7 +235,8 @@ fieldset:hover,
 .input_number_visible::-webkit-outer-spin-button,
 .input_number_visible::-webkit-inner-spin-button {
     /*IE,CHROME, SAFARI */
-    -webkit-appearance: none;
+    
+-webkit-appearance: none;
 }
 
 .input_number_visible[type=number] {
@@ -251,9 +279,8 @@ fieldset:hover,
     background-color: #9A86FD;
     padding: 10px 0;
 }
-
-.modal_button:hover {
-    transition: all 1.5s;
+.btn_:hover, .modal_button:hover {
+    transition: all 1s;
     background-color: aliceblue;
 }
 
@@ -496,15 +523,6 @@ body.closed .modal {
     }
 }
 
-@media only screen and (min-width: 700px) {
-    .btn_:hover {
-        background-color: aliceblue;
-        color: #2A2734;
-        transform: translate(0px, -6px);
-        transition: all 0.5s;
-    }
-}
-
 @media only screen and (max-width: 500px) {
     .header_div_quality {
         margin: 10px 20px;
@@ -536,6 +554,10 @@ body.closed .modal {
     footer {
         font-size: 12px;
 
+    }
+    
+    select {
+        width: 15em !important;
     }
 
     .modal {
