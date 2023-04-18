@@ -26,3 +26,7 @@
   <li> Uso de Ternary Operator no código JS (O ternário é utilizado para substituir o if/else, tornando assim o código mais limpo e enxuto)</li>
   <li> Utilização de RegExp Reference (As expressões regulares foram adicionadas ao JS para realizar a troca de letras com acentos por letras sem acento, tornando o código menos suscetível a bugs, caso o usuário escreva alguma palavra com acento).</li>
   <li> Utilização de Seletores avançados de CSS3 (Sendo possível a criação de elementos animados).</li>
+  
+## Imagem do Projeto
+
+![image](https://user-images.githubusercontent.com/113299561/232912101-0d900643-092a-4342-9191-10117451c508.png)
